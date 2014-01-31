@@ -1,1 +1,5 @@
-uploads
+/uploads/categorias-productos/*.jpg
+/uploads/productos/*.pdf
+/uploads/productos/*.jpg
+/uploads/servicios/*.pdf
+/uploads/novedades/*.jpg
