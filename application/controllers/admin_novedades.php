@@ -235,45 +235,9 @@ class Admin_novedades extends CI_Controller {
                         'ficha_eng' => url_title("$idNovedad $titEng", '-', true)
                     );                    
                     $data['flash_message'] = $this->novedades_model->update_novedad($idNovedad, $data_to_store); 
-                    $this->uploadConfig['file_name'] = $idNovedad . '-esp';
-                    $this->upload->initialize($this->uploadConfig);
-                    if($this->upload->do_upload('imagen_esp')){
-                        $upload_data = $this->upload->data();
-
-                        // Salvo imagen preview
-                        $this->imgLibConfig['source_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['thumb_marker'] = NOVEDAD_IMAGE_PREVIEW_MARKER;
-                        $this->imgLibConfig['new_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['width'] = NOVEDAD_PREVIEW_WIDTH;
-                        $this->imgLibConfig['height'] = NOVEDAD_PREVIEW_HEIGHT;
-                        $this->image_lib->initialize($this->imgLibConfig); 
-                        if(!$this->image_lib->resize())
-                        {
-                            $data['error'] = $this->image_lib->display_errors() . "<br>";
-                            log_message('error', "(2) " . $this->image_lib->display_errors());
-                        } else {
-                            // Salvo imagen thumbnail
-                            $this->imgLibConfig['thumb_marker'] = NOVEDAD_IMAGE_THUMB_MARKER;
-                            $this->imgLibConfig['width'] = NOVEDAD_THUMB_WIDTH;
-                            $this->imgLibConfig['height'] = NOVEDAD_THUMB_HEIGHT;
-                            $this->image_lib->clear();
-                            $this->image_lib->initialize($this->imgLibConfig); 
-                            if(! $this->image_lib->resize())
-                            {
-                                $data['error'] .= $this->image_lib->display_errors() . "<br>";
-                                log_message('error', "(3) " . $this->image_lib->display_errors());
-                            }
-                        }
-
-                    } else {
-                        $upload_data = $this->upload->data();
-                        if(is_array($upload_data) && !empty($upload_data['file_name'])){
-                            $data['error'] = $this->upload->display_errors() . "<br>";
-                            log_message('error', $this->upload->display_errors());
-                            log_message('error', "(1) " . $this->upload->display_errors());
-                        }
-                    } 
-                }else{
+                    $this->manejarUploads($idNovedad);
+                    
+                } else {
                     $data['flash_message'] = FALSE; 
                 }
 
@@ -341,49 +305,9 @@ class Admin_novedades extends CI_Controller {
                         'ficha_esp' => url_title("$id $titEsp", '-', true),
                         'ficha_eng' => url_title("$id $titEng", '-', true)
                     );                    
-                    $data['flash_message'] = $this->novedades_model->update_novedad($id, $data_to_store); 
-                    $this->uploadConfig['file_name'] = $id . '-esp';
-                    $this->upload->initialize($this->uploadConfig);
-                    if($this->upload->do_upload('imagen_esp')){
-                        $upload_data = $this->upload->data();
-
-                        // Salvo imagen preview
-                        $this->imgLibConfig['source_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['thumb_marker'] = NOVEDAD_IMAGE_PREVIEW_MARKER;
-                        $this->imgLibConfig['new_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['width'] = NOVEDAD_PREVIEW_WIDTH;
-                        $this->imgLibConfig['height'] = NOVEDAD_PREVIEW_HEIGHT;
-                        $this->image_lib->initialize($this->imgLibConfig); 
-                        if(!$this->image_lib->resize())
-                        {
-                            $data['error'] = $this->image_lib->display_errors() . "<br>";
-                            log_message('error', "(2) " . $this->image_lib->display_errors());
-                            $this->session->set_flashdata('flash_message', 'not_updated');
-                        } else {
-                            // Salvo imagen thumbnail
-                            $this->imgLibConfig['thumb_marker'] = NOVEDAD_IMAGE_THUMB_MARKER;
-                            $this->imgLibConfig['width'] = NOVEDAD_THUMB_WIDTH;
-                            $this->imgLibConfig['height'] = NOVEDAD_THUMB_HEIGHT;
-                            $this->image_lib->clear();
-                            $this->image_lib->initialize($this->imgLibConfig); 
-                            if(! $this->image_lib->resize())
-                            {
-                                $data['error'] .= $this->image_lib->display_errors() . "<br>";
-                                $this->session->set_flashdata('flash_message', 'not_updated');
-                                log_message('error', "(3) " . $this->image_lib->display_errors());
-                            }
-                            else {
-                                $this->session->set_flashdata('flash_message', 'updated');
-                            }
-                        }
-
-                    } else {
-                        $upload_data = $this->upload->data();
-                        if(is_array($upload_data) && !empty($upload_data['file_name'])){
-                            $data['error'] = $this->upload->display_errors() . "<br>";
-                        }
-                        $this->session->set_flashdata('flash_message', 'updated');
-                    } 
+                    $data['flash_message'] = $this->novedades_model->update_novedad($id, $data_to_store);  
+                    $this->manejarUploads($id);
+                    $this->session->set_flashdata('flash_message', 'updated');
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
@@ -419,6 +343,47 @@ class Admin_novedades extends CI_Controller {
         @unlink($this->uploadConfig['upload_path'] . $id . "-esp" . NOVEDAD_IMAGE_THUMB_MARKER . "." . $this->uploadConfig['allowed_types']);
 
         redirect('admin/novedades');
+    }
+
+    private function manejarUploads($idNovedad){
+        $this->uploadConfig['file_name'] = $idNovedad;
+        $this->upload->initialize($this->uploadConfig);
+        if($this->upload->do_upload('imagen')){
+            $upload_data = $this->upload->data();
+
+            // Salvo imagen preview
+            $this->imgLibConfig['source_image'] = $upload_data['full_path'];
+            $this->imgLibConfig['thumb_marker'] = NOVEDAD_IMAGE_PREVIEW_MARKER;
+            $this->imgLibConfig['new_image'] = $upload_data['full_path'];
+            $this->imgLibConfig['width'] = NOVEDAD_PREVIEW_WIDTH;
+            $this->imgLibConfig['height'] = NOVEDAD_PREVIEW_HEIGHT;
+            $this->image_lib->initialize($this->imgLibConfig); 
+            if(!$this->image_lib->resize())
+            {
+                $data['error'] = $this->image_lib->display_errors() . "<br>";
+                log_message('error', "(2) " . $this->image_lib->display_errors());
+            } else {
+                // Salvo imagen thumbnail
+                $this->imgLibConfig['thumb_marker'] = NOVEDAD_IMAGE_THUMB_MARKER;
+                $this->imgLibConfig['width'] = NOVEDAD_THUMB_WIDTH;
+                $this->imgLibConfig['height'] = NOVEDAD_THUMB_HEIGHT;
+                $this->image_lib->clear();
+                $this->image_lib->initialize($this->imgLibConfig); 
+                if(! $this->image_lib->resize())
+                {
+                    $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                    log_message('error', "(3) " . $this->image_lib->display_errors());
+                }
+            }
+
+        } else {
+            $upload_data = $this->upload->data();
+            if(is_array($upload_data) && !empty($upload_data['file_name'])){
+                $data['error'] = $this->upload->display_errors() . "<br>";
+                log_message('error', $this->upload->display_errors());
+                log_message('error', "(1) " . $this->upload->display_errors());
+            }
+        } 
     }
 
     public function portitulo(){

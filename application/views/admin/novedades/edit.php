@@ -111,14 +111,14 @@
       <div class="control-group">
         <label for="inputError" class="control-label">Archivo de imagen</label>
         <div class="controls">
-          <input type="file" id="imagen_esp" name="imagen_esp" size="40">
+          <input type="file" id="imagen_esp" name="imagen" size="40">
         </div>
       </div>
 
       <div class="control-group">
           <label for="inputError" class="control-label">Vista previa</label>
           <div class="controls">
-            <img src="<?php echo site_url() . 'uploads/novedades/' . $novedad[0]['id_novedad'] . '-esp' . $previewMarker . '.jpg'; ?>" width="<?=$previewWidth?>" height="<?=$previewHeight?>" />
+            <img src="<?php echo site_url() . 'uploads/novedades/' . $novedad[0]['id_novedad'] . $previewMarker . '.jpg'; ?>" width="<?=$previewWidth?>" height="<?=$previewHeight?>" />
           </div>
       </div>
 

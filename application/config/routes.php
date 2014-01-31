@@ -37,11 +37,26 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['default_controller'] = 'user/index';
+$route['default_controller'] = 'sitio/index';
 $route['404_override'] = '';
 
 /* Sitio publico */
-$route['contacto'] = 'sitio/contacto';
+$route['quienes-somos'] = 'sitio/quienes_somos/esp';
+$route['mision-y-vision'] = 'sitio/mision_y_vision/esp';
+$route['politica-ambiental'] = 'sitio/politica_ambiental/esp';
+$route['politica-calidad'] = 'sitio/politica_calidad/esp';
+$route['politica-seguridad'] = 'sitio/politica_seguridad/esp';
+$route['planta-industrial'] = 'sitio/planta_industrial/esp';
+$route['contacto'] = 'sitio/contacto/esp';
+
+$route['who-we-are'] = 'sitio/quienes_somos/eng';
+$route['mision-and-vision'] = 'sitio/mision_y_vision/eng';
+$route['environmental-policy'] = 'sitio/politica_ambiental/eng';
+$route['quality-policy'] = 'sitio/politica_calidad/eng';
+$route['security-policy'] = 'sitio/politica_seguridad/eng';
+$route['industrial-facilities'] = 'sitio/planta_industrial/eng';
+$route['contact'] = 'sitio/contacto/eng';
+
 $route['productos/preview/(:any)'] = 'productos/preview/$1';
 $route['productos/imagen/(:any)'] = 'productos/imagen/$1';
 $route['productos/imagengaleria/(:any)'] = 'productos/imagenGaleria/$1';

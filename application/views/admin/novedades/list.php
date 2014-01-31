@@ -73,7 +73,7 @@
             echo '<td>'.($row['visible'] ? 'Si' : 'No').'</td>';
             echo '<td style="width:' . $thumbnailWidth . 'px;">';
             ?>
-            <img src="<?php echo site_url().'uploads/novedades/' . $row['id_novedad'] . '-esp' . $thumbMarker . '.jpg'; ?>" style="width: <?=$thumbnailWidth?>px; height: <?=$thumbnailHeight?>px" />
+            <img src="<?php echo site_url().'uploads/novedades/' . $row['id_novedad'] . $thumbMarker . '.jpg'; ?>" style="width: <?=$thumbnailWidth?>px; height: <?=$thumbnailHeight?>px" />
             <?
             echo '</td>';
             echo '<td class="crud-actions">

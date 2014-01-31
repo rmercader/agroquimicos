@@ -106,7 +106,7 @@
         <ul id="sortable">
         <?php foreach($visibles as $row): ?>
           <li class="ui-state-default" id="<?=$row['id_novedad']?>">
-            <?=$row['titulo_esp']?>
+            <?=$row['titulo']?>
           </li>
         <?php endforeach ?>
         </ul>

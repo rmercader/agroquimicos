@@ -125,14 +125,28 @@ class Novedades_model extends CI_Model {
 		$this->db->delete('novedad'); 
 	}
 
-    function obtener_visibles_ordenadas(){
-        $this->db->select('novedad.id_novedad, novedad.titulo_esp');
+    function obtener_visibles_ordenadas($limit=0, $idioma='esp'){
+        $this->db->select("id_novedad, titulo_{$idioma} AS titulo, cabezal_{$idioma} AS cabezal, ficha_{$idioma} AS ficha");
         $this->db->from('novedad');
         $this->db->where('visible', 1);
         $this->db->order_by('orden', 'ASC');
+
+        if($limit > 0){
+            $this->db->limit(intval($limit));
+        }
+
         $query = $this->db->get();
         
         return $query->result_array(); 
+    }
+
+    function obtener_por_ficha($ficha, $idioma='esp'){
+        $this->db->select("id_novedad, titulo_{$idioma} AS titulo, cabezal_{$idioma} AS cabezal, texto_{$idioma} AS texto");
+        $this->db->from('categoria_producto');
+        $this->db->where('ficha_' . $idioma, $ficha);
+        $query = $this->db->get();
+
+        return $query->row_array();
     }
 }
 ?>

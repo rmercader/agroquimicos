@@ -160,5 +160,22 @@ class Categorias_productos_model extends CI_Model {
         return $row_array["nombre_{$idioma}"];
     }
 
+    function obtener_categorias($idioma='esp'){
+        $this->db->select("id_categoria_producto, nombre_{$idioma} AS nombre");
+        $this->db->from('categoria_producto');
+
+        $query = $this->db->get();
+        
+        return $query->result_array(); 
+    }
+
+    function obtener_por_ficha($ficha, $idioma='esp'){
+        $this->db->select('id_categoria_producto, nombre_' . $idioma);
+        $this->db->from('categoria_producto');
+        $this->db->where('ficha_' . $idioma, $ficha);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
 }
 ?>
