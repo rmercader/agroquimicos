@@ -1,0 +1,1 @@
+Este directorio deberá tener permisos de escritura para el usuario del web server.
