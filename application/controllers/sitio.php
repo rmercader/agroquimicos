@@ -25,7 +25,7 @@ class Sitio extends PublicController {
 		$data['novedades_menu'] = $this->novedadesMenu();
     }
 
-	public function index(){
+	public function index($idioma){
 		
 		$data['previewWidth'] = PRODUCTO_PREVIEW_WIDTH;
 		$data['previewHeight'] = PRODUCTO_PREVIEW_HEIGHT;

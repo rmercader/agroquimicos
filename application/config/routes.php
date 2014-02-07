@@ -37,10 +37,12 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['default_controller'] = 'sitio/index';
+$route['default_controller'] = 'sitio/index/esp';
 $route['404_override'] = '';
 
 /* Sitio publico */
+$route['esp'] = 'sitio/index/esp';
+$route['eng'] = 'sitio/index/eng';
 $route['quienes-somos'] = 'sitio/quienes_somos/esp';
 $route['mision-y-vision'] = 'sitio/mision_y_vision/esp';
 $route['politica-ambiental'] = 'sitio/politica_ambiental/esp';
