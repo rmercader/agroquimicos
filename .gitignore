@@ -3,3 +3,4 @@
 /uploads/productos/*.jpg
 /uploads/servicios/*.pdf
 /uploads/novedades/*.jpg
+/application/logs/*
