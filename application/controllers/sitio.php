@@ -35,12 +35,13 @@ class Sitio extends PublicController {
 
 	public function index($idioma="esp"){
 		$data['idioma'] = $idioma;
-		$data['previewWidth'] = PRODUCTO_PREVIEW_WIDTH;
-		$data['previewHeight'] = PRODUCTO_PREVIEW_HEIGHT;
-		$data['novedades'] = $this->novedades_model->obtener_visibles_ordenadas(0, $this->idioma);
+		$this->idioma = $idioma;
 		$this->cargarDatosComunes($data);
-		$this->cargarEtiquetasMenu($idioma, $data);
-		$this->cargarEtiquetasUris($idioma, $data);
+		$this->cargarArchivosIdiomas();
+
+		$data['previewWidth'] = NOVEDAD_PREVIEW_WIDTH;
+		$data['previewHeight'] = NOVEDAD_PREVIEW_HEIGHT;
+		$data['novedades'] = $this->novedades_model->obtener_visibles_ordenadas(0, $this->idioma);
 		$data['main_content'] = 'publico/index';
 		
 		//load the view
@@ -49,49 +50,81 @@ class Sitio extends PublicController {
 
 	public function quienes_somos($idioma){
 		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+
 		$data['main_content'] = 'publico/index';
 
 		//load the view
         $this->load->view('publico/template', $data);
 	}
 
-	public function mision_y_vision(){
-		//load the view
-		$data['main_content'] = 'publico/index';
+	public function mision_y_vision($idioma){
+		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+
+		$data['main_content'] = 'publico/index';
+
+		//load the view
         $this->load->view('publico/template', $data);
 	}
 
-	public function politica_ambiental(){
-		//load the view
-		$data['main_content'] = 'publico/index';
+	public function politica_ambiental($idioma){
+		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+
+		$data['main_content'] = 'publico/index';
+
+		//load the view
         $this->load->view('publico/template', $data);
 	}
 
-	public function politica_calidad(){
-		//load the view
-		$data['main_content'] = 'publico/index';
+	public function politica_calidad($idioma){
+		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		
+		$data['main_content'] = 'publico/index';
+
+		//load the view
         $this->load->view('publico/template', $data);
 	}
 
-	public function politica_seguridad(){
-		//load the view
-		$data['main_content'] = 'publico/index';
+	public function politica_seguridad($idioma){
+		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		
+		$data['main_content'] = 'publico/index';
+
+		//load the view
         $this->load->view('publico/template', $data);
 	}
 
-	public function planta_industrial(){
-		//load the view
-		$data['main_content'] = 'publico/index';
+	public function planta_industrial($idioma){
+		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		
+		$data['main_content'] = 'publico/index';
+
+		//load the view
         $this->load->view('publico/template', $data);
 	}
 
-	public function contacto(){
+	public function contacto($idioma){
+		$data['idioma'] = $idioma;
+		$this->idioma = $idioma;
+		$this->cargarArchivosIdiomas();
+
 		$error = "";
 		$nombre = "";
 		$email = "";
@@ -140,8 +173,9 @@ class Sitio extends PublicController {
 		$data["mensaje"] = $consulta;
 		$data["error"] = $error;
 
-		//load the view
 		$data['main_content'] = 'publico/contacto';
+
+		//load the view
         $this->load->view('publico/template', $data);
 	}
 
