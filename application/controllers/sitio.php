@@ -25,12 +25,22 @@ class Sitio extends PublicController {
 		$data['novedades_menu'] = $this->novedadesMenu();
     }
 
-	public function index($idioma){
-		
+    private function cargarEtiquetasMenu($idioma, &$data){
+    	$data['etiquetasMenu'] = $this->etiquetasMenu($idioma);
+    }
+
+    private function cargarEtiquetasUris($idioma, &$data){
+    	$data['etiquetasUris'] = $this->etiquetasUris($idioma);
+    }
+
+	public function index($idioma="esp"){
+		$data['idioma'] = $idioma;
 		$data['previewWidth'] = PRODUCTO_PREVIEW_WIDTH;
 		$data['previewHeight'] = PRODUCTO_PREVIEW_HEIGHT;
 		$data['novedades'] = $this->novedades_model->obtener_visibles_ordenadas(0, $this->idioma);
 		$this->cargarDatosComunes($data);
+		$this->cargarEtiquetasMenu($idioma, $data);
+		$this->cargarEtiquetasUris($idioma, $data);
 		$data['main_content'] = 'publico/index';
 		
 		//load the view

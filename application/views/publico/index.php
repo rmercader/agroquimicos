@@ -1,7 +1,7 @@
 <div class="pages clearfix">
 	<div class="bienvenido">
 		<h1>Bienvenidos a Proquimur</h1>
-		<div class="ima-home"><img src="images/ima-home.jpg"/></div>
+		<div class="ima-home"><img src="<?=base_url()?>images/ima-home.jpg"/></div>
 		<div class="text-home">Desde el año 1981 nuestra empresa se dedica a la producción de productos químicos de alta calidad para uso agropecuario. Instalados en Uruguay y sirviendo a clientes en la región y el mundo, Proquimur apunta a la mayor calidad en sus productos y servicios.<br /><br />
 	Conozca en este sitio nuestros productos y servicios, por favor, no dude en contactarnos por cualquier consulta o sugerencia.<br />
 	Muchas gracias.</div>

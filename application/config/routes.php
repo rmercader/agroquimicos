@@ -37,27 +37,28 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['default_controller'] = 'sitio/index/esp';
+$route['default_controller'] = 'sitio/index';
 $route['404_override'] = '';
 
 /* Sitio publico */
-$route['esp'] = 'sitio/index/esp';
-$route['eng'] = 'sitio/index/eng';
-$route['quienes-somos'] = 'sitio/quienes_somos/esp';
-$route['mision-y-vision'] = 'sitio/mision_y_vision/esp';
-$route['politica-ambiental'] = 'sitio/politica_ambiental/esp';
-$route['politica-calidad'] = 'sitio/politica_calidad/esp';
-$route['politica-seguridad'] = 'sitio/politica_seguridad/esp';
-$route['planta-industrial'] = 'sitio/planta_industrial/esp';
-$route['contacto'] = 'sitio/contacto/esp';
+$route['^(esp|eng)$'] = 'sitio/index/$1';
 
-$route['who-we-are'] = 'sitio/quienes_somos/eng';
-$route['mision-and-vision'] = 'sitio/mision_y_vision/eng';
-$route['environmental-policy'] = 'sitio/politica_ambiental/eng';
-$route['quality-policy'] = 'sitio/politica_calidad/eng';
-$route['security-policy'] = 'sitio/politica_seguridad/eng';
-$route['industrial-facilities'] = 'sitio/planta_industrial/eng';
-$route['contact'] = 'sitio/contacto/eng';
+// Institucionales
+$route['esp/quienes-somos'] = 'sitio/quienes_somos/esp';
+$route['esp/mision-y-vision'] = 'sitio/mision_y_vision/esp';
+$route['esp/politica-ambiental'] = 'sitio/politica_ambiental/esp';
+$route['esp/politica-calidad'] = 'sitio/politica_calidad/esp';
+$route['esp/politica-seguridad'] = 'sitio/politica_seguridad/esp';
+$route['esp/planta-industrial'] = 'sitio/planta_industrial/esp';
+$route['esp/contacto'] = 'sitio/contacto/esp';
+
+$route['eng/who-we-are'] = 'sitio/quienes_somos/eng';
+$route['eng/mision-and-vision'] = 'sitio/mision_y_vision/eng';
+$route['eng/environmental-policy'] = 'sitio/politica_ambiental/eng';
+$route['eng/quality-policy'] = 'sitio/politica_calidad/eng';
+$route['eng/security-policy'] = 'sitio/politica_seguridad/eng';
+$route['eng/industrial-plant'] = 'sitio/planta_industrial/eng';
+$route['eng/contact'] = 'sitio/contacto/eng';
 
 $route['productos/preview/(:any)'] = 'productos/preview/$1';
 $route['productos/imagen/(:any)'] = 'productos/imagen/$1';
