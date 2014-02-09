@@ -142,7 +142,7 @@ class Novedades_model extends CI_Model {
 
     function obtener_por_ficha($ficha, $idioma='esp'){
         $this->db->select("id_novedad, titulo_{$idioma} AS titulo, cabezal_{$idioma} AS cabezal, texto_{$idioma} AS texto");
-        $this->db->from('categoria_producto');
+        $this->db->from('novedad');
         $this->db->where('ficha_' . $idioma, $ficha);
         $query = $this->db->get();
 

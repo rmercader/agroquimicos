@@ -20,29 +20,18 @@ class Sitio extends PublicController {
 		$this->load->helper('email');
     }
 
-    private function cargarDatosComunes(&$data){
-    	$data['categorias_menu'] = $this->categoriasMenu();
-		$data['novedades_menu'] = $this->novedadesMenu();
-    }
-
-    private function cargarEtiquetasMenu($idioma, &$data){
-    	$data['etiquetasMenu'] = $this->etiquetasMenu($idioma);
-    }
-
-    private function cargarEtiquetasUris($idioma, &$data){
-    	$data['etiquetasUris'] = $this->etiquetasUris($idioma);
-    }
-
 	public function index($idioma="esp"){
 		$data['idioma'] = $idioma;
 		$this->idioma = $idioma;
 		$this->cargarDatosComunes($data);
 		$this->cargarArchivosIdiomas();
+		$this->cargarClassesMenuHorizontal($data);
 
 		$data['previewWidth'] = NOVEDAD_PREVIEW_WIDTH;
 		$data['previewHeight'] = NOVEDAD_PREVIEW_HEIGHT;
 		$data['novedades'] = $this->novedades_model->obtener_visibles_ordenadas(0, $this->idioma);
 		$data['main_content'] = 'publico/index';
+		$data['bot_inicio_class'] = 'bot_inicio_activo';
 		
 		//load the view
         $this->load->view('publico/template', $data);
@@ -53,8 +42,10 @@ class Sitio extends PublicController {
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		$this->cargarClassesMenuHorizontal($data);
 
 		$data['main_content'] = 'publico/index';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);
@@ -65,8 +56,10 @@ class Sitio extends PublicController {
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		$this->cargarClassesMenuHorizontal($data);
 
 		$data['main_content'] = 'publico/index';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);
@@ -77,8 +70,10 @@ class Sitio extends PublicController {
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		$this->cargarClassesMenuHorizontal($data);
 
 		$data['main_content'] = 'publico/index';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);
@@ -89,8 +84,10 @@ class Sitio extends PublicController {
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		$this->cargarClassesMenuHorizontal($data);
 		
 		$data['main_content'] = 'publico/index';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);
@@ -101,8 +98,10 @@ class Sitio extends PublicController {
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		$this->cargarClassesMenuHorizontal($data);
 		
 		$data['main_content'] = 'publico/index';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);
@@ -113,8 +112,10 @@ class Sitio extends PublicController {
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
 		$this->cargarDatosComunes($data);
+		$this->cargarClassesMenuHorizontal($data);
 		
 		$data['main_content'] = 'publico/index';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);
@@ -124,6 +125,7 @@ class Sitio extends PublicController {
 		$data['idioma'] = $idioma;
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
+		$this->cargarClassesMenuHorizontal($data);
 
 		$error = "";
 		$nombre = "";
@@ -174,6 +176,7 @@ class Sitio extends PublicController {
 		$data["error"] = $error;
 
 		$data['main_content'] = 'publico/contacto';
+		$data['bot_empresa_class'] = 'bot_empresa_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);

@@ -12,7 +12,7 @@
 		<img width="<?=$previewWidth?>" height="<?=$previewHeight?>" src="<?=base_url()?>uploads/novedades/<?=$novedad['id_novedad']?>.prv.jpg" />
 		<div class="text_not_chicas"><?=$novedad['cabezal']?></div>
 		<div class="leer_mas">
-		<a href="<?=base_url()?>novedades/<?=$novedad['ficha']?>"><?=lang('label_mas_informacion')?></a></div>
+		<a href="<?=base_url() . $idioma?>/<?=lang('uri_novedades')?>/<?=$novedad['ficha']?>"><?=lang('label_mas_informacion')?></a></div>
 	</div>
 <?php endforeach; ?>
 

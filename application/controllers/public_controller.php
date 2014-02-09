@@ -30,4 +30,22 @@ class PublicController extends CI_Controller {
         $this->lang->load('label', $this->idioma);
         $this->lang->load('static', $this->idioma);
     }
+
+    protected function cargarDatosComunes(&$data){
+        $data['categorias_menu'] = $this->categoriasMenu();
+        $data['novedades_menu'] = $this->novedadesMenu();
+    }
+
+    protected function cargarEtiquetasMenu($idioma, &$data){
+        $data['etiquetasMenu'] = $this->etiquetasMenu($idioma);
+    }
+
+    protected function cargarClassesMenuHorizontal(&$data){
+        $data['bot_inicio_class'] = 'bot_inicio';
+        $data['bot_empresa_class'] = 'bot_empresa';
+        $data['bot_productos_class'] = 'bot_productos';
+        $data['bot_serv_class'] = 'bot_serv';
+        $data['bot_nov_class'] = 'bot_nov';
+        $data['bot_contacto_class'] = 'bot_contacto';
+    }
 }

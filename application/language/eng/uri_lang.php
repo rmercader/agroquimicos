@@ -10,6 +10,7 @@ $lang['uri_planta_industrial'] = 'industrial-plant';
 $lang['uri_productos'] = 'products';
 $lang['uri_informacion_tecnica'] = 'technical-info';
 $lang['uri_fichas_seguridad'] = 'security-tokens';
+$lang['uri_novedades'] = 'news';
 $lang['uri_contacto'] = 'contact';
 
 ?>
