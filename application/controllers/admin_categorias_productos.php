@@ -213,44 +213,7 @@ class Admin_categorias_productos extends CI_Controller {
                         'ficha_eng' => url_title("$idCategoria $nomEng", '-', true)
                     );                    
                     $data['flash_message'] = $this->categorias_productos_model->update_categoria_producto($idCategoria, $data_to_store); 
-                    $this->uploadConfig['file_name'] = $idCategoria . '-esp';
-                    $this->upload->initialize($this->uploadConfig);
-                    if($this->upload->do_upload('imagen_esp')){
-                        $upload_data = $this->upload->data();
-
-                        // Salvo imagen preview
-                        $this->imgLibConfig['source_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['thumb_marker'] = CATEGORIA_PRODUCTO_IMAGE_PREVIEW_MARKER;
-                        $this->imgLibConfig['new_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['width'] = CATEGORIA_PRODUCTO_PREVIEW_WIDTH;
-                        $this->imgLibConfig['height'] = CATEGORIA_PRODUCTO_PREVIEW_HEIGHT;
-                        $this->image_lib->initialize($this->imgLibConfig); 
-                        if(!$this->image_lib->resize())
-                        {
-                            $data['error'] = $this->image_lib->display_errors() . "<br>";
-                            log_message('error', "(2) " . $this->image_lib->display_errors());
-                        } else {
-                            // Salvo imagen thumbnail
-                            $this->imgLibConfig['thumb_marker'] = CATEGORIA_PRODUCTO_IMAGE_THUMB_MARKER;
-                            $this->imgLibConfig['width'] = CATEGORIA_PRODUCTO_THUMB_WIDTH;
-                            $this->imgLibConfig['height'] = CATEGORIA_PRODUCTO_THUMB_HEIGHT;
-                            $this->image_lib->clear();
-                            $this->image_lib->initialize($this->imgLibConfig); 
-                            if(! $this->image_lib->resize())
-                            {
-                                $data['error'] .= $this->image_lib->display_errors() . "<br>";
-                                log_message('error', "(3) " . $this->image_lib->display_errors());
-                            }
-                        }
-
-                    } else {
-                        $upload_data = $this->upload->data();
-                        if(is_array($upload_data) && !empty($upload_data['file_name'])){
-                            $data['error'] = $this->upload->display_errors() . "<br>";
-                            log_message('error', $this->upload->display_errors());
-                            log_message('error', "(1) " . $this->upload->display_errors());
-                        }
-                    } 
+                    $this->manejarUploads($idCategoria); 
                 }else{
                     $data['flash_message'] = FALSE; 
                 }
@@ -295,50 +258,13 @@ class Admin_categorias_productos extends CI_Controller {
                     $data_to_store = array(
                         'ficha_esp' => url_title("$id $nomEsp", '-', true),
                         'ficha_eng' => url_title("$id $nomEng", '-', true)
-                    );                    
-                    $data['flash_message'] = $this->categorias_productos_model->update_categoria_producto($id, $data_to_store); 
-                    $this->uploadConfig['file_name'] = $id . '-esp';
-                    $this->upload->initialize($this->uploadConfig);
-                    if($this->upload->do_upload('imagen_esp')){
-                        $upload_data = $this->upload->data();
+                    );            
 
-                        // Salvo imagen preview
-                        $this->imgLibConfig['source_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['thumb_marker'] = CATEGORIA_PRODUCTO_IMAGE_PREVIEW_MARKER;
-                        $this->imgLibConfig['new_image'] = $upload_data['full_path'];
-                        $this->imgLibConfig['width'] = CATEGORIA_PRODUCTO_PREVIEW_WIDTH;
-                        $this->imgLibConfig['height'] = CATEGORIA_PRODUCTO_PREVIEW_HEIGHT;
-                        $this->image_lib->initialize($this->imgLibConfig); 
-                        if(!$this->image_lib->resize())
-                        {
-                            $data['error'] = $this->image_lib->display_errors() . "<br>";
-                            log_message('error', "(2) " . $this->image_lib->display_errors());
-                            $this->session->set_flashdata('flash_message', 'not_updated');
-                        } else {
-                            // Salvo imagen thumbnail
-                            $this->imgLibConfig['thumb_marker'] = CATEGORIA_PRODUCTO_IMAGE_THUMB_MARKER;
-                            $this->imgLibConfig['width'] = CATEGORIA_PRODUCTO_THUMB_WIDTH;
-                            $this->imgLibConfig['height'] = CATEGORIA_PRODUCTO_THUMB_HEIGHT;
-                            $this->image_lib->clear();
-                            $this->image_lib->initialize($this->imgLibConfig); 
-                            if(! $this->image_lib->resize())
-                            {
-                                $data['error'] .= $this->image_lib->display_errors() . "<br>";
-                                $this->session->set_flashdata('flash_message', 'not_updated');
-                                log_message('error', "(3) " . $this->image_lib->display_errors());
-                            }
-                            else {
-                                $this->session->set_flashdata('flash_message', 'updated');
-                            }
-                        }
-
-                    } else {
-                        $upload_data = $this->upload->data();
-                        if(is_array($upload_data) && !empty($upload_data['file_name'])){
-                            $data['error'] = $this->upload->display_errors() . "<br>";
-                        }
+                    if($this->categorias_productos_model->update_categoria_producto($id, $data_to_store)){
+                        $data['flash_message'] = TRUE; 
+                        $this->manejarUploads($id);
                         $this->session->set_flashdata('flash_message', 'updated');
-                    } 
+                    }
                 }else{
                     $this->session->set_flashdata('flash_message', 'not_updated');
                 }
@@ -369,11 +295,52 @@ class Admin_categorias_productos extends CI_Controller {
         $this->categorias_productos_model->delete_categoria_producto($id);
         
         // Borro las imagenes del filesystem
-        @unlink($this->uploadConfig['upload_path'] . $id . "-esp." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . "-esp" . CATEGORIA_PRODUCTO_IMAGE_PREVIEW_MARKER . "." . $this->uploadConfig['allowed_types']);
-        @unlink($this->uploadConfig['upload_path'] . $id . "-esp" . CATEGORIA_PRODUCTO_IMAGE_THUMB_MARKER . "." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . "." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . CATEGORIA_PRODUCTO_IMAGE_PREVIEW_MARKER . "." . $this->uploadConfig['allowed_types']);
+        @unlink($this->uploadConfig['upload_path'] . $id . CATEGORIA_PRODUCTO_IMAGE_THUMB_MARKER . "." . $this->uploadConfig['allowed_types']);
         
         redirect('admin/categorias_productos');
+    }
+
+    private function manejarUploads($idCategoria){
+        $this->uploadConfig['file_name'] = $idCategoria;
+        $this->upload->initialize($this->uploadConfig);
+        if($this->upload->do_upload('imagen')){
+            $upload_data = $this->upload->data();
+
+            // Salvo imagen preview
+            $this->imgLibConfig['source_image'] = $upload_data['full_path'];
+            $this->imgLibConfig['thumb_marker'] = CATEGORIA_PRODUCTO_IMAGE_PREVIEW_MARKER;
+            $this->imgLibConfig['new_image'] = $upload_data['full_path'];
+            $this->imgLibConfig['width'] = CATEGORIA_PRODUCTO_PREVIEW_WIDTH;
+            $this->imgLibConfig['height'] = CATEGORIA_PRODUCTO_PREVIEW_HEIGHT;
+            $this->image_lib->initialize($this->imgLibConfig); 
+            if(!$this->image_lib->resize())
+            {
+                $data['error'] = $this->image_lib->display_errors() . "<br>";
+                log_message('error', "(2) " . $this->image_lib->display_errors());
+            } else {
+                // Salvo imagen thumbnail
+                $this->imgLibConfig['thumb_marker'] = CATEGORIA_PRODUCTO_IMAGE_THUMB_MARKER;
+                $this->imgLibConfig['width'] = CATEGORIA_PRODUCTO_THUMB_WIDTH;
+                $this->imgLibConfig['height'] = CATEGORIA_PRODUCTO_THUMB_HEIGHT;
+                $this->image_lib->clear();
+                $this->image_lib->initialize($this->imgLibConfig); 
+                if(! $this->image_lib->resize())
+                {
+                    $data['error'] .= $this->image_lib->display_errors() . "<br>";
+                    log_message('error', "(3) " . $this->image_lib->display_errors());
+                }
+            }
+
+        } else {
+            $upload_data = $this->upload->data();
+            if(is_array($upload_data) && !empty($upload_data['file_name'])){
+                $data['error'] = $this->upload->display_errors() . "<br>";
+                log_message('error', $this->upload->display_errors());
+                log_message('error', "(1) " . $this->upload->display_errors());
+            }
+        }
     }
 
     public function pornombre(){

@@ -72,14 +72,14 @@
       <div class="control-group">
         <label for="inputError" class="control-label">Archivo de imagen</label>
         <div class="controls">
-          <input type="file" id="imagen_esp" name="imagen_esp" size="40">
+          <input type="file" id="imagen" name="imagen" size="40">
         </div>
       </div>
 
       <div class="control-group">
           <label for="inputError" class="control-label">Vista previa</label>
           <div class="controls">
-            <img src="<?php echo site_url().'/uploads/categorias-productos/' . $categoria_producto[0]['id_categoria_producto'] . '-esp' . $previewMarker . '.jpg'; ?>" width="<?=$previewWidth?>" height="<?=$previewHeight?>" />
+            <img src="<?php echo site_url().'/uploads/categorias-productos/' . $categoria_producto[0]['id_categoria_producto'] . $previewMarker . '.jpg'; ?>" width="<?=$previewWidth?>" height="<?=$previewHeight?>" />
           </div>
       </div>
 

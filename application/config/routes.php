@@ -50,6 +50,8 @@ $route['esp/politica-ambiental'] = 'sitio/politica_ambiental/esp';
 $route['esp/politica-calidad'] = 'sitio/politica_calidad/esp';
 $route['esp/politica-seguridad'] = 'sitio/politica_seguridad/esp';
 $route['esp/planta-industrial'] = 'sitio/planta_industrial/esp';
+$route['esp/productos'] = 'productos/index/esp';
+$route['esp/categorias/(:any)'] = 'productos/categoria/$1/esp';
 $route['esp/novedades/(:any)'] = 'novedades/detalle/$1/esp';
 $route['esp/contacto'] = 'sitio/contacto/esp';
 
@@ -59,6 +61,8 @@ $route['eng/environmental-policy'] = 'sitio/politica_ambiental/eng';
 $route['eng/quality-policy'] = 'sitio/politica_calidad/eng';
 $route['eng/security-policy'] = 'sitio/politica_seguridad/eng';
 $route['eng/industrial-plant'] = 'sitio/planta_industrial/eng';
+$route['eng/products'] = 'productos/index/eng';
+$route['eng/categories/(:any)'] = 'productos/categoria/$1/eng';
 $route['eng/news/(:any)'] = 'novedades/detalle/$1/eng';
 $route['eng/contact'] = 'sitio/contacto/eng';
 

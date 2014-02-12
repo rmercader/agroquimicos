@@ -135,5 +135,13 @@ class Productos_model extends CI_Model {
 		$this->db->delete('producto'); 
 	}
     
+    function productos_por_categoria($idCategoria, $idioma){
+        $this->db->select("id_producto, nombre_{$idioma} AS nombre, ficha_{$idioma} AS ficha, formulacion_{$idioma} AS formulacion, principio_activo_{$idioma} AS principio_activo");
+        $this->db->from('producto');
+        $this->db->where('id_categoria_producto', $idCategoria);
+        $query = $this->db->get();
+        
+        return $query->result_array(); 
+    }
 }
 ?>

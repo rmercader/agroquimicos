@@ -34,11 +34,11 @@
   </li>
 
 	<li class="<?=$bot_productos_class?>">
-    <a href="<?=base_url() . lang('uri_productos')?>" title="<?=lang('menu_productos')?>" target="_self"><?=lang('menu_productos')?></a>
+    <a href="<?=base_url() . $idioma . '/' . lang('uri_productos')?>" title="<?=lang('menu_productos')?>" target="_self"><?=lang('menu_productos')?></a>
     <ul>
       <?php foreach($categorias_menu as $categoria): ?>
       <li>
-        <a href="#"><?=$categoria['nombre']?></a>
+        <a href="<?=base_url() . $idioma . '/' . lang('uri_categorias') . '/' . $categoria['ficha']?>"><?=$categoria['nombre']?></a>
       </li>
       <?php endforeach; ?>
     </ul>

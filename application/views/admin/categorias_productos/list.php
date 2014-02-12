@@ -69,7 +69,7 @@
             echo '<td>'.$row['nombre_esp'].'</td>';
             echo '<td style="width:' . $thumbnailWidth . 'px;">';
             ?>
-            <img src="<?php echo site_url().'uploads/categorias-productos/' . $row['id_categoria_producto'] . '-esp' . $thumbMarker . '.jpg'; ?>" style="width: <?=$thumbnailWidth?>px; height: <?=$thumbnailHeight?>px" />
+            <img src="<?php echo site_url().'uploads/categorias-productos/' . $row['id_categoria_producto'] . $thumbMarker . '.jpg'; ?>" style="width: <?=$thumbnailWidth?>px; height: <?=$thumbnailHeight?>px" />
             <?
             echo '</td>';
             echo '<td class="crud-actions">

@@ -69,7 +69,7 @@
       <div class="control-group">
         <label for="inputError" class="control-label">Archivo de imagen</label>
         <div class="controls">
-          <input type="file" id="imagen_esp" name="imagen_esp" size="40">
+          <input type="file" id="imagen" name="imagen" size="40">
         </div>
       </div>
       <div class="form-actions">

@@ -1,3 +1,4 @@
+<div style="background-color: #FFF;">
 <?php
 
 echo "Titulo: " . $novedad['titulo'];
@@ -8,3 +9,4 @@ echo "Texto: " . $novedad['texto'];
 echo "<BR />";
 
 ?>
+</div>
