@@ -29,6 +29,7 @@ class PublicController extends CI_Controller {
         $this->lang->load('uri', $this->idioma);
         $this->lang->load('label', $this->idioma);
         $this->lang->load('static', $this->idioma);
+        $this->lang->load('messages', $this->idioma);
     }
 
     protected function cargarDatosComunes(&$data){

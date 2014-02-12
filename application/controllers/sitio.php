@@ -125,6 +125,7 @@ class Sitio extends PublicController {
 		$data['idioma'] = $idioma;
 		$this->idioma = $idioma;
 		$this->cargarArchivosIdiomas();
+		$this->cargarDatosComunes($data);
 		$this->cargarClassesMenuHorizontal($data);
 
 		$error = "";
@@ -144,28 +145,28 @@ class Sitio extends PublicController {
 			);
 
 			if($nombre == "" || $consulta == "" || $email == ""){
-				$error .= "Todos los campos son requeridos.";
+				$error .= lang('gral_campos_requeridos');
 			} else if ($email != "" && !valid_email($email)){
-				$error .= "Ingrese una dirección de email válida.";
+				$error .= lang('contacto_email_valido');
 			} else {
 				$idMensaje = $this->mensajes_model->store_mensaje($mensaje);
 				if($idMensaje){
 					$nombre = "";
 					$email = "";
 					$consulta = "";
-					/*
+					
 					// Notifico con email
 					$dataMail = $mensaje;
 					$mensajeMail = $this->load->view('publico/mensaje-detalle-mail', $dataMail, true);
 					$this->email->initialize(array("mailtype"=>"html"));
-					$this->email->from('noreply@dianasaravia.com.uy', 'Diana Saravia - Sitio Galeria');
-					$this->email->to('arte@dianasaravia.com.uy');
+					$this->email->from(EMAIL_NO_REPLY, 'Proquimur');
+					$this->email->to(EMAIL_CONTACTO);
 					$this->email->bcc('rodrigomercader@gmail.com'); 
 					$this->email->subject("Nueva consulta desde el sitio web de la galeria (Id: {$idMensaje})");
 					$this->email->message($mensajeMail);
-					$this->email->send();*/
+					$this->email->send();
 					
-					$error = "Tu consulta fue recibida correctamente. Nos comunicaremos contigo a la brevedad. Muchas gracias.";
+					$error = lang('contacto_exito');
 				}
 			}
 		}
@@ -176,7 +177,7 @@ class Sitio extends PublicController {
 		$data["error"] = $error;
 
 		$data['main_content'] = 'publico/contacto';
-		$data['bot_empresa_class'] = 'bot_empresa_activo';
+		$data['bot_contacto_class'] = 'bot_contacto_activo';
 
 		//load the view
         $this->load->view('publico/template', $data);

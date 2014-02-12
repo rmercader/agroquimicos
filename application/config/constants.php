@@ -66,5 +66,8 @@ define("PRODUCTO_IMAGE_QUALITY", 100);
 define("PRODUCTO_IMAGE_PREVIEW_MARKER", ".prv");
 define("PRODUCTO_IMAGE_THUMB_MARKER", ".thu");
 
+define('EMAIL_CONTACTO', 'contacto@proquimur.com.uy');
+define('EMAIL_NO_REPLY', 'noreply@proquimur.com.uy');
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -59,6 +59,6 @@
           <?php endforeach; ?>
 			  </ul>   
         </li>
- 	<li class="<?=$bot_contacto_class?>"><a href="<?=base_url() . lang('uri_contacto')?>" title="<?=lang('menu_contacto')?>" target="_self"><?=lang('menu_contacto')?></a></li>
+ 	<li class="<?=$bot_contacto_class?>"><a href="<?=base_url() . $idioma . '/' . lang('uri_contacto')?>" title="<?=lang('menu_contacto')?>" target="_self"><?=lang('menu_contacto')?></a></li>
 	</ul>
 </div>
