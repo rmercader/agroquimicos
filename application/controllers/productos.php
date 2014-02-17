@@ -45,7 +45,7 @@ class Productos extends PublicController {
 		if($categoria){
 			$data['nombreCategoria'] = $categoria['nombre'];
 			$data['idCategoria'] = $categoria['id_categoria_producto'];
-			$productos = $this->productos_model->productos_por_categoria($categoria['id_categoria_producto'], $idioma="esp");
+			$productos = $this->productos_model->productos_por_categoria($categoria['id_categoria_producto'], $idioma);
 			$data['productos'] = $productos;
 		}
 		
@@ -67,11 +67,11 @@ class Productos extends PublicController {
 		$this->cargarArchivosIdiomas();
 		$this->cargarClassesMenuHorizontal($data);
 
-		$data['previewWidth'] = NOVEDAD_PREVIEW_WIDTH;
-		$data['previewHeight'] = NOVEDAD_PREVIEW_HEIGHT;
-		$data['novedad'] = $this->novedades_model->obtener_por_ficha($ficha, $this->idioma);
-		$data['main_content'] = 'publico/detalle_novedad';
-		$data['bot_nov_class'] = 'bot_nov_activo';
+		$data['previewWidth'] = PRODUCTO_PREVIEW_WIDTH;
+		$data['previewHeight'] = PRODUCTO_PREVIEW_HEIGHT;
+		$data['producto'] = $this->productos_model->obtener_por_ficha($ficha, $this->idioma);
+		$data['main_content'] = 'publico/detalle_producto';
+		$data['bot_productos_class'] = 'bot_productos_activo';
 		
 		//load the view
         $this->load->view('publico/template', $data);

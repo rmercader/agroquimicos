@@ -143,5 +143,32 @@ class Productos_model extends CI_Model {
         
         return $query->result_array(); 
     }
+
+    function obtener_por_ficha($ficha, $idioma='esp'){
+        // Armo una interminable lista de campos
+        $strSelect = "";
+        $strSelect .= "id_categoria_producto, ";
+        $strSelect .= "nombre_{$idioma} AS nombre, ";
+        $strSelect .= "formulacion_{$idioma} AS formulacion, "; 
+        $strSelect .= "generalidades_{$idioma} AS generalidades, ";  
+        $strSelect .= "principio_activo_{$idioma} AS principio_activo, ";
+        $strSelect .= "porcentaje_en_peso, ";
+        $strSelect .= "gramos_por_litro, ";
+        $strSelect .= "instrucciones_{$idioma} AS instrucciones, ";
+        $strSelect .= "momento_aplicacion_{$idioma} AS momento_aplicacion, ";
+        $strSelect .= "frecuencia_aplicacion_{$idioma} AS frecuencia_aplicacion, ";
+        $strSelect .= "comp_fito_{$idioma} AS comp_fito, ";
+        $strSelect .= "modo_preparacion_{$idioma} AS modo_preparacion, ";
+        $strSelect .= "clase_toxicologica_{$idioma} AS clase_toxicologica, ";
+        $strSelect .= "antidoto_{$idioma} AS antidoto, ";
+        $strSelect .= "primeros_auxilios_{$idioma} AS primeros_auxilios";
+
+        $this->db->select($strSelect);
+        $this->db->from('producto');
+        $this->db->where('ficha_' . $idioma, $ficha);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
 }
 ?>

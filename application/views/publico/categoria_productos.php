@@ -24,7 +24,7 @@
                 <div class="tit-detalles azul"><?=lang('productos_principio_activo')?>:</div>
             	<div class="text-formulacion"><?=$prod['principio_activo']?></div>
                 <div class="bot-mas">
-                    <a href="#"><?=lang('label_mas_informacion')?></a>
+                    <a href="<?=base_url() . $idioma . '/' . lang('uri_productos') . '/' .  $prod['ficha']?>"><?=lang('label_mas_informacion')?></a>
                 </div>
             </div>
         </div>
