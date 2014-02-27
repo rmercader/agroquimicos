@@ -45,13 +45,15 @@ class Productos_model extends CI_Model {
     public function get_productos($search_string=null, $order=null, $order_type='Asc', $limit_start=null, $limit_end=null)
     {
 	    
-		$this->db->select('producto.id_producto, producto.nombre_esp, categoria_producto.nombre_esp AS nombre_categoria');
+		$this->db->select('producto.id_producto, producto.nombre_esp, categoria_producto.nombre_esp AS nombre_categoria, producto.formulacion_esp, producto.principio_activo_esp');
 		$this->db->from('producto');
         $this->db->join('categoria_producto', 'categoria_producto.id_categoria_producto = producto.id_categoria_producto', 'inner');
 
 		if($search_string){
 			$this->db->like('producto.nombre_esp', $search_string);
             $this->db->like('categoria_producto.nombre_esp', $search_string);
+            $this->db->like('producto.formulacion_esp', $search_string);
+            $this->db->like('producto.principio_activo_esp', $search_string);
 		}
 
 		if($order){
@@ -81,7 +83,7 @@ class Productos_model extends CI_Model {
     */
     function count_productos($search_string=null, $order=null)
     {
-		$this->db->select('*');
+		$this->db->select('id_producto');
 		$this->db->from('producto');
 		if($search_string){
 			$this->db->like('nombre_esp', $search_string);

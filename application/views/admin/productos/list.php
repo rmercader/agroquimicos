@@ -35,7 +35,12 @@
         $attributes = array('class' => 'form-inline reset-margin', 'id' => 'myform');
        
         //save the columns names in a array that we will use as filter         
-        $options_productos = array('nombre_esp' => 'Nombre', 'categoria_producto.nombre_esp'=>'Categoría');
+        $options_productos = array(
+          'nombre_esp' => 'Nombre', 
+          'categoria_producto.nombre_esp' => 'Categoría', 
+          'formulacion_esp' => 'Formulación',
+          'principio_activo_esp' => 'Principio activo'
+        );
 
         echo form_open('admin/productos', $attributes);
  
@@ -62,6 +67,8 @@
           <tr>
             <th class="yellow header headerSortDown">Nombre</th>
             <th class="yellow header headerSortDown">Categoría</th>
+            <th class="yellow header headerSortDown">Formulación</th>
+            <th class="yellow header headerSortDown">Principio activo</th>
             <th class="yellow header headerSortDown">Imagen</th>
           </tr>
         </thead>
@@ -72,6 +79,8 @@
             echo '<tr>';
             echo '<td>'.$row['nombre_esp'].'</td>';
             echo '<td>'.$row['nombre_categoria'].'</td>';
+            echo '<td>'.$row['formulacion_esp'].'</td>';
+            echo '<td>'.$row['principio_activo_esp'].'</td>';
             echo '<td style="width:' . $thumbnailWidth . 'px;">';
             ?>
             <img src="<?php echo site_url().'uploads/productos/' . $row['id_producto'] . $thumbMarker . '.jpg'; ?>" style="width: <?=$thumbnailWidth?>px; height: <?=$thumbnailHeight?>px" />

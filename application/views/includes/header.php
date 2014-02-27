@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<link href="<?php echo base_url(); ?>assets/css/admin/global.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo base_url(); ?>assets/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="<?=base_url()?>images/favicon.ico"  />
 	
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.9.1.min.js"></script>	
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.3.custom.min.js"></script>

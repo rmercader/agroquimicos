@@ -43,7 +43,7 @@ $route['404_override'] = '';
 /* Sitio publico */
 $route['^(esp|eng)$'] = 'sitio/index/$1';
 
-// Institucionales
+// Institucionales español
 $route['esp/quienes-somos'] = 'sitio/quienes_somos/esp';
 $route['esp/mision-y-vision'] = 'sitio/mision_y_vision/esp';
 $route['esp/politica-ambiental'] = 'sitio/politica_ambiental/esp';

@@ -41,7 +41,7 @@ class Servicios_model extends CI_Model {
 		$this->db->from('servicio');
 
 		if($search_string){
-			$this->db->like('titulo_esp', $search_string);
+			$this->db->like('nombre_esp', $search_string);
 		}
 
 		if($order){
@@ -71,10 +71,10 @@ class Servicios_model extends CI_Model {
     */
     function count_servicios($search_string=null, $order=null)
     {
-		$this->db->select('*');
+		$this->db->select('id_servicio');
 		$this->db->from('servicio');
 		if($search_string){
-			$this->db->like('titulo_esp', $search_string);
+			$this->db->like('nombre_esp', $search_string);
 		}
 		if($order){
 			$this->db->order_by($order, 'Asc');
